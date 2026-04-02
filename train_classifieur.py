@@ -437,7 +437,7 @@ def train_classifier(
     label_encoder = train_dataset.class_to_idx
     val_dataset = ImageFolder(valid_datadir, transform=transforms_valid)
     train_weights = get_weights(train_dataset.imgs, df["Image Index"], df[weights_col])
-    valid_weights = get_weights(val_dataset.imgs, df["Image Index"], df[weights_col])
+    #valid_weights = get_weights(val_dataset.imgs, df["Image Index"], df[weights_col])
 
     print(trainer.accelerator)
     print('num_workers set to :', num_workers)
@@ -451,7 +451,7 @@ def train_classifier(
     val_dataloader = DataLoader(
         val_dataset,
         batch_size=batch_size,
-        sampler=WeightedRandomSampler(valid_weights, len(valid_weights)),
+        shuffle=False,
         num_workers=num_workers
     )
 
